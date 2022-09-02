@@ -22,10 +22,16 @@ const initialState = {
 const Login = () => {
   const [formValue, setFormValue] = useState(initialState);
   const { email, password } = formValue;
-  
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const { loading, error } = useSelector((state) => ({ ...state.auth }));
+
+  // show errors
+  useEffect(() => {
+    error && toast.error(error);
+  }, [error]);
+  
   const handleSubmit = (e) => {
     e.preventDefault()
     if (email && password) {
@@ -69,8 +75,7 @@ const Login = () => {
             {/* login button */}
             <div className="col-12">
               <MDBBtn style={{ width: "100%" }} className="mt-2">
-                {/* {loading && (<MDBSpinner size="sm" role="status" tag="span" className="me-2" />)} Login */}
-                Login
+                {loading && (<MDBSpinner size="sm" role="status" tag="span" className="me-2" />)} Login
               </MDBBtn>
             </div>
           </MDBValidation>
