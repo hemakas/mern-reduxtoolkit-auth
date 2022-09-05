@@ -38,6 +38,18 @@ const authSlice = createSlice({
       error: "",
       loading: false,
     },
+    reducers: {
+      // set user when logged in
+      setUser: (state, action) => {
+        state.user = action.payload
+      },
+
+      // logout user
+      setLogout: (state, actino) => {
+        localStorage.clear()
+        state.user = null
+      }
+    },
     extraReducers: {
       [login.pending]: (state, action) => {
         state.loading = true;
@@ -66,6 +78,8 @@ const authSlice = createSlice({
     },
     
   });
+
+  export const { setUser, setLogout } = authSlice.actions 
 
   export default authSlice.reducer;
   
