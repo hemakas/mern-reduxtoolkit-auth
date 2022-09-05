@@ -20,8 +20,10 @@ const initialState = {
 };
 
 const Login = () => {
+  // mdb 
   const [formValue, setFormValue] = useState(initialState);
   const { email, password } = formValue;
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -64,8 +66,9 @@ const Login = () => {
             
             {/* email */}
             <div className="col-md-12">
-              <MDBInput label="Email" type="email" value={email} name="email" onChange={onInputChange} required validation="Please provide your email" />
+              <MDBInput label="Email" type="email" value={email} name="email" onChange={onInputChange} required validation="Please provide your email" id='validationEmail01' invalid/>
             </div>
+            
             
             {/* password */}
             <div className="col-md-12">

@@ -6,8 +6,7 @@ const secret = 'test'
 
 // sign up function
 export const SignUp = async (req, res) => {
-    const { name, email, password } = req.body
-
+    const { firstName, lastName, email, password } = req.body
     try {
         const registeredUser = await User.findOne({ email })
 
@@ -17,7 +16,18 @@ export const SignUp = async (req, res) => {
             })
         }
 
+        // hashing password
         const hashedPassword = await bcrypt.hash(password, 12)
+        // first name to UCwords
+        let fName = firstName.toLowerCase().replace(/\b[a-z]/g, function(letter) {
+            return letter.toUpperCase();
+        })
+        // last name to UCwords
+        let lName = lastName.toLowerCase().replace(/\b[a-z]/g, function(letter) {
+            return letter.toUpperCase();
+        })
+        // full name with UCwords
+        const name = fName + ' ' + lName
 
         // create user
         const result = await User.create({
